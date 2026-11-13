@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efe7db">
+  <title>Приглашение на свадьбу</title>
+
+  <style>
+    :root {
+      --background: #efe7db;
+      --paper: #fffaf1;
+      --ink: #392b2a;
+      --accent: #782e40;
+      --line: #d7c1ae;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(ellipse at top, #fffaf2, var(--background) 75%);
+      font-family: Georgia, "Times New Roman", serif;
+      text-align: center;
+    }
+
+    main {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+    }
+
+    .cover, .letter { width: min(100%, 620px); }
+
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--accent);
+      font: 600 .72rem/1.5 system-ui, sans-serif;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 9vw, 5.3rem);
+      font-weight: 400;
+      line-height: .98;
+      overflow-wrap: anywhere;
+    }
+
+    .ampersand {
+      display: block;
+      margin: 5px 0;
+      color: var(--accent);
+      font-size: .55em;
+      font-style: italic;
+    }
+
+    .envelope {
+      position: relative;
+      display: block;
+      width: min(100%, 360px);
+      aspect-ratio: 1.6;
+      margin: 34px auto 0;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: #e7d5c0;
+      box-shadow: 0 18px 38px #684b3729;
+      cursor: pointer;
+      isolation: isolate;
+      perspective: 900px;
+    }
+
+    .envelope::before, .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    .envelope::before {
+      background: linear-gradient(145deg, #f6e8d6, #dfc5ac);
+      clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .envelope::after {
+      background: linear-gradient(#ecd7bf, #f5e6d3);
+      clip-path: polygon(0 100%, 50% 38%, 100% 100%);
+    }
+
+    .flap {
+      position: absolute;
+      z-index: 1;
+      inset: 0 0 36%;
+      background: linear-gradient(#f9eddd, #e9d1b7);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform .55s ease;
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 2;
+      top: 62%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 56px;
+      aspect-ratio: 1;
+      border: 3px double #d28b95;
+      border-radius: 48% 52% 49% 51%;
+      background: radial-gradient(circle at 35% 25%, #ad5464, #6d2537 72%);
+      color: #fff0dc;
+      box-shadow: 0 4px 9px #55263555;
+      font: 1.35rem Georgia, serif;
+      transform: translate(-50%, -50%);
+      transition: opacity .2s ease, scale .2s ease;
+    }
+
+    .envelope:hover .seal { scale: 1.08; }
+    .envelope:focus-visible { outline: 3px solid var(--accent); outline-offset: 7px; }
+    .opening .flap { transform: rotateX(175deg); }
+    .opening .seal { opacity: 0; }
+
+    .hint {
+      margin-top: 24px;
+      color: var(--accent);
+      font: 500 .85rem/1.5 system-ui, sans-serif;
+    }
+
+    .letter {
+      padding: clamp(32px, 8vw, 70px) clamp(24px, 7vw, 64px);
+      border: 1px solid var(--line);
+      outline: 1px solid var(--line);
+      outline-offset: -9px;
+      background: var(--paper);
+      box-shadow: 0 18px 45px #684b371c;
+      animation: appear .65s ease both;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .letter h2 {
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 400;
+    }
+
+    .intro {
+      max-width: 34ch;
+      margin: 20px auto 28px;
+      font-size: 1.13rem;
+      line-height: 1.65;
+    }
+
+    .details {
+      margin: 0;
+      padding: 22px 0;
+      border-block: 1px solid var(--line);
+    }
+
+    .details div + div { margin-top: 18px; }
+
+    dt {
+      margin-bottom: 5px;
+      color: var(--accent);
+      font: 600 .7rem/1.4 system-ui, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    dd { margin: 0; font-size: 1.12rem; line-height: 1.4; }
+    .signature { margin: 26px 0 0; color: var(--accent); font-style: italic; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="cover" id="cover" aria-label="Свадебный конверт">
+      <p class="eyebrow">Приглашение на свадьбу</p>
+      <h1>
+        <span id="bride"></span>
+        <span class="ampersand">&amp;</span>
+        <span id="groom"></span>
+      </h1>
+
+      <button class="envelope" id="open" type="button"
+              aria-label="Открыть приглашение" aria-controls="letter">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="seal" aria-hidden="true">♥</span>
+      </button>
+      <p class="hint">Нажмите на конверт, чтобы открыть</p>
+    </section>
+
+    <article class="letter" id="letter" aria-labelledby="greeting" hidden>
+      <p class="eyebrow">Приглашение на свадьбу</p>
+      <h2 id="greeting" tabindex="-1">Дорогие наши!</h2>
+      <p class="intro" id="message"></p>
+
+      <dl class="details">
+        <div>
+          <dt>Когда</dt>
+          <dd id="date"></dd>
+        </div>
+        <div>
+          <dt>Где</dt>
+          <dd id="place"></dd>
+        </div>
+      </dl>
+
+      <p class="signature">С любовью,<br><span id="signature"></span></p>
+    </article>
+  </main>
+
+  <script>
+    // Здесь можно поменять имена и детали свадьбы.
+    const wedding = {
+      bride: 'Катя',
+      groom: 'Имя жениха',
+      date: 'Дату и время сообщим позже',
+      place: 'Место сообщим позже',
+      message: 'Мы женимся! Будем очень рады, если вы проведёте этот день вместе с нами.'
+    };
+
+    const byId = (id) => document.getElementById(id);
+
+    for (const [id, value] of Object.entries(wedding)) {
+      byId(id).textContent = value;
+    }
+
+    byId('signature').textContent = `${wedding.bride} и ${wedding.groom}`;
+    document.title = `${wedding.bride} и ${wedding.groom} — приглашение на свадьбу`;
+
+    byId('open').addEventListener('click', () => {
+      const envelope = byId('open');
+      envelope.disabled = true;
+      envelope.classList.add('opening');
+
+      const reveal = () => {
+        byId('cover').hidden = true;
+        byId('letter').hidden = false;
+        byId('greeting').focus();
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        reveal();
+      } else {
+        window.setTimeout(reveal, 550);
+      }
+    });
+  </script>
+</body>
+</html>
